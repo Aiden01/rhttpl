@@ -18,7 +18,7 @@ use httparse::Response as ParsedResponse;
 use std::collections::HashMap;
 use std::str;
 
-type ResponseHeader = HashMap<String, String>;
+type ResponseHeaders = HashMap<String, String>;
 
 pub enum Status {
     Ok,
@@ -28,7 +28,7 @@ pub struct Response {
     pub status_code: u16,
     data: String,
     pub http_version: u8,
-    pub headers: ResponseHeader,
+    pub headers: ResponseHeaders,
 }
 
 impl Response {
@@ -48,7 +48,7 @@ impl Response {
     }
 }
 
-fn get_headers(headers: &[Header]) -> ResponseHeader {
+fn get_headers(headers: &[Header]) -> ResponseHeaders {
     let mut r_headers = HashMap::new();
     for h in headers {
         r_headers.insert(
