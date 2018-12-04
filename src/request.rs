@@ -89,7 +89,9 @@ impl<'a> Request<'a> {
                 );
                 println!("Socket header format: \n {}", socket_header);
                 // write to the stream
-                stream.write(socket_header.as_bytes());
+                stream
+                    .write(socket_header.as_bytes())
+                    .expect("Failed to write to the stream");
 
                 // reads the response
                 let mut buf = String::new();

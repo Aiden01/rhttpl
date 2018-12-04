@@ -20,8 +20,39 @@ pub mod errors;
 pub mod request;
 pub mod request_url;
 pub mod response;
+use self::{request::Method, request::Request, response::Response};
 
-pub fn get() {}
+pub fn get<T>(url: T) -> Result<Response, errors::Error>
+where
+    T: AsRef<str>,
+{
+    let res = Request::new(Method::GET, url.as_ref()).send()?;
+    Ok(res)
+}
+
+pub fn post<T>(url: T) -> Result<Response, errors::Error>
+where
+    T: AsRef<str>,
+{
+    let res = Request::new(Method::POST, url.as_ref()).send()?;
+    Ok(res)
+}
+
+pub fn put<T>(url: T) -> Result<Response, errors::Error>
+where
+    T: AsRef<str>,
+{
+    let res = Request::new(Method::PUT, url.as_ref()).send()?;
+    Ok(res)
+}
+
+pub fn patch<T>(url: T) -> Result<Response, errors::Error>
+where
+    T: AsRef<str>,
+{
+    let res = Request::new(Method::PATCH, url.as_ref()).send()?;
+    Ok(res)
+}
 
 #[cfg(test)]
 mod tests {
